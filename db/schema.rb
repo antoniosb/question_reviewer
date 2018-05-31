@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180531180109) do
+=======
+ActiveRecord::Schema.define(version: 20180531185912) do
+
+  create_table "options", force: :cascade do |t|
+    t.string "content"
+    t.boolean "answer"
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "content"
+    t.string "source"
+    t.string "year"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+>>>>>>> questions_alternatives_crud
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
