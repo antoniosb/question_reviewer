@@ -23,12 +23,7 @@
 
   <div class="field">
     <%= form.label :year %>
-    <%= form.text_field :year, id: :question_year %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :question_user_id %>
+    <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), selected: 2018, id: :question_year %>
   </div>
 
   <div class="actions">
