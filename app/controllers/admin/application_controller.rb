@@ -8,7 +8,6 @@ module Admin
         sign_out current_user
         authenticate_user!
       end
-      # redirect_to root_path, status: 301
     end
   end
 end
