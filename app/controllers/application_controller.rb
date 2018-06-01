@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    admin_questions_path if current_user.admin?
-    questions_path
+    current_user.admin? ? admin_questions_path : questions_path
   end
 end
