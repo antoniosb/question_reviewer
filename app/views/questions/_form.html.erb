@@ -26,6 +26,24 @@
     <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), selected: 2018, id: :question_year %>
   </div>
 
+  <h2>Alternativas</h2>
+  <%= form.fields_for :options do |option| %>
+    <div>
+
+      <%= option.label :content %>
+      <%= option.text_field :content %>
+
+      <%= option.check_box :answer %>
+      <%= option.label :answer %>
+
+
+      <% if option.object.persisted? %>
+        <%= option.check_box :_destroy %>
+        <%= option.label :_destroy, "Destroy" %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
