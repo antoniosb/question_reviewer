@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_admin
+
   # GET /questions
   # GET /questions.json
   def index
@@ -82,9 +82,5 @@ class QuestionsController < ApplicationController
 
   def default_option_attributes
     %i[id content answer]
-  end
-
-  def redirect_admin
-    redirect_to admin_questions_path if current_user.admin?
   end
 end
