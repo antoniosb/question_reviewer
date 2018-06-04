@@ -1,0 +1,92 @@
+<%= form_with(model: [:admin, question], local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Question.statuses.keys.map { |s| [s.humanize, s] }, {},id: :question_status, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content, id: :question_content, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :source %>
+    <%= form.text_field :source, id: :question_source, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), {}, selected: 2018, id: :question_year, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div id="alternatives">
+    <h2>Alternativas</h2>
+    <%= form.fields_for :options do |option| %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= option.label :content %>
+          <%= option.text_field :content, disabled: true, class: 'form-control' %>
+        </div>
+        <div class="col-md-6">
+          <%= option.check_box :answer, disabled: true %>
+          <%= option.label :answer %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Revisões</h2>
+    <h4>Histórico</h4>
+    <hr>
+    <%= form.fields_for :reviews do |review| %>
+      <% if review.object&.persisted? %>
+        <p><%= review.object.comment %></p>
+        <p>
+          <%= review.object.created_at.strftime("%B %d, %Y") %>
+          <%= review.check_box :_destroy %>
+          <%= review.label :_destroy, "Apagar" %>
+        </p>
+        <hr>
+      <% else %>
+        <div id="reviews">
+          <h4>Nova Revisão</h4>
+          <%= review.label :comment %>
+          <%= review.text_area :comment, class: 'form-control' %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+var question_status = $('#question_status');
+var reviews = $('#reviews');
+question_status.on('change', function() {
+    var text = question_status.find(":selected").text();
+    if(text === 'Rejected') {
+        reviews.show();
+        alert('Por favor, forneça um comentário.');
+        $(window).scrollTop($('#reviews').offset().top);
+    } else {
+        reviews.hide();
+    }
+})
+
+</script>
