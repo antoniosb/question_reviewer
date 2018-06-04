@@ -1,13 +1,13 @@
 module Admin
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-    before_action :authenticate_admin!
+    before_action :authorize_admin
 
-    def authenticate_admin!
-      unless current_user.present? && current_user.admin?
-        sign_out current_user
-        authenticate_user!
-      end
+    private
+
+    def authorize_admin
+      authenticate_user!
+      redirect_to root_path, alert: 'Not authorized.' unless current_user.admin?
     end
   end
 end

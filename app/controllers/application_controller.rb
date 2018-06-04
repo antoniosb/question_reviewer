@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :authenticate_user!
+  before_action :authorize_user
+  skip_before_action :authorize_user, if: :devise_controller?
 
-  def authenticate_user!
-    unless current_user.present? && current_user.user?
-      sign_out current_user
-      authenticate_user!
-    end
-  end
-
-  protected
+  private
 
   def after_sign_in_path_for(resource)
-    current_user.admin? ? admin_questions_path : questions_path
+    current_user.try(:admin?) ? admin_questions_path : questions_path
+  end
+
+  def authorize_user
+    authenticate_user!
+    redirect_to root_path, alert: 'Not authorized.' unless current_user.user?
   end
 end
