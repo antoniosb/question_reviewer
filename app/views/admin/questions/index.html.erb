@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<%= current_user.email %>
+<h1>Perguntas</h1>
+<br>
+<div class="container">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+      <a href="#pending" role="tab" data-toggle="tab">
+        <icon class="fa fa-home"></icon> Pendentes
+      </a>
+    </li>
+    <li><a href="#profile" role="tab" data-toggle="tab">
+      <i class="fa fa-user"></i> Aprovadas
+    </a>
+    </li>
+    <li>
+      <a href="#messages" role="tab" data-toggle="tab">
+        <i class="fa fa-envelope"></i> Reprovadas
+      </a>
+    </li>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane fade active in" id="pending">
+      <%= render 'questions', questions: @questions.pending %>
+    </div>
+    <div class="tab-pane fade" id="profile">
+      <%= render 'questions', questions: @questions.approved %>
+    </div>
+    <div class="tab-pane fade" id="messages">
+      <%= render 'questions', questions: @questions.rejected %>
+    </div>
+  </div>
+</div>
+

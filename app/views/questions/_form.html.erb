@@ -23,13 +23,26 @@
 
   <div class="field">
     <%= form.label :year %>
-    <%= form.text_field :year, id: :question_year %>
+    <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), selected: 2018, id: :question_year %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :question_user_id %>
-  </div>
+  <h2>Alternativas</h2>
+  <%= form.fields_for :options do |option| %>
+    <div>
+
+      <%= option.label :content %>
+      <%= option.text_field :content %>
+
+      <%= option.check_box :answer %>
+      <%= option.label :answer %>
+
+
+      <% if option.object.persisted? %>
+        <%= option.check_box :_destroy %>
+        <%= option.label :_destroy, "Destroy" %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

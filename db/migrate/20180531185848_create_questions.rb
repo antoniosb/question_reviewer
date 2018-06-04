@@ -4,7 +4,7 @@ class CreateQuestions < ActiveRecord::Migration[5.1]
       t.string :content
       t.string :source
       t.string :year
-      t.references :user, foreign_key: true
+      t.references :user, foreign_key: {on_delete: :cascade}
 
       t.timestamps
     end
