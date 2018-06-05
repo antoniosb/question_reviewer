@@ -7,7 +7,7 @@ module Admin
 
     def authorize_admin
       authenticate_user!
-      redirect_to root_path, alert: 'Not authorized.' unless current_user.admin?
+      redirect_to root_path, status: 301 unless current_user.admin?
     end
   end
 end
