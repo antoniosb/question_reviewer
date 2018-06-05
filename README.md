@@ -1,24 +1,57 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Question Reviewer is a platform on which users can create Questions with 5 options, then another user with Administrative priviledges can review and update the status of any normal user question, giving feedback on rejection. There is also feedback history.
 
-Things you may want to cover:
+Getting Started
 
-* Ruby version
+Question Reviewer works with 
+* Ruby version 2.4.0p 
 
-* System dependencies
+* Rails version 5.1.6
 
-* Configuration
+* SQLite3
 
-* Database creation
+and have the following dependencies
 
-* Database initialization
+* Devise (user authentication)
 
-* How to run the test suite
+* RSpec (test framework)
 
-* Services (job queues, cache servers, search engines, etc.)
+* FactoryBot (model factory to be used in tests)
 
-* Deployment instructions
+* Pry Rails (Debugger)
 
-* ...
+To install all dependencies run
+```console
+bundle install
+```
+
+To configure database
+```console
+rake db:migrate db:seed
+```
+
+Run all tests suit
+```console
+bundle exec rspec spec 
+```
+
+Run project in local machine
+```console
+rails s 
+```
+
+Default admin user
+email: admin@email.com
+password: 12341234
+
+To add a new admin:
+- create a normal user
+ 
+Then run on console
+```console
+rails c 
+```
+```console
+User.find('newuser@email.com').admin! 
+```
