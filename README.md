@@ -4,8 +4,8 @@ Question Reviewer is a platform on which users can create Questions with 5 optio
 
 Getting Started
 
-Question Reviewer works with 
-* Ruby version 2.4.0p 
+Question Reviewer works with
+* Ruby version 2.4.0p
 
 * Rails version 5.1.6
 
@@ -33,12 +33,12 @@ rake db:migrate db:seed
 
 Run all tests suit
 ```console
-bundle exec rspec spec 
+bundle exec rspec spec
 ```
 
 Run project in local machine
 ```console
-rails s 
+rails s
 ```
 
 Default admin user
@@ -47,17 +47,17 @@ password: 12341234
 
 To add a new admin:
 - create a normal user
- 
+
 Then run on console
 ```console
-rails c 
+rails c
 ```
 ```console
-User.find('newuser@email.com').admin! 
+User.find('newuser@email.com').admin!
 ```
 
 -----
 
 ### Rails ERD representation:
 
-![erd.pdf](https://github.com/antoniosb/question_reviewer/edit/master/erd.pdf)
+![erd.png](https://github.com/antoniosb/question_reviewer/edit/master/erd.png)
