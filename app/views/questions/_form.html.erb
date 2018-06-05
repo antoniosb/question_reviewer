@@ -10,44 +10,44 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <%= form.label :content, 'Conteúdo' %>
+        <%= form.text_area :content, id: :question_content, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :content, 'Conteúdo' %>
-    <%= form.text_field :content, id: :question_content %>
-  </div>
+      <div class="field">
+        <%= form.label :source, 'Fonte' %>
+        <%= form.text_field :source, id: :question_source, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :source, 'Fonte' %>
-    <%= form.text_field :source, id: :question_source %>
-  </div>
+      <div class="field">
+        <%= form.label :year, 'Ano' %>
+        <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), {},selected: 2018,  id: :question_year, class: 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= form.label :year, 'Ano' %>
-    <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), selected: 2018, id: :question_year %>
-  </div>
+      <h2>Alternativas</h2>
+      <%= form.fields_for :options do |option| %>
+        <div>
 
-  <h2>Alternativas</h2>
-  <%= form.fields_for :options do |option| %>
-    <div>
+          <%= option.label :content, 'Conteúdo' %>
+          <%= option.text_field :content %>
 
-      <%= option.label :content, 'Conteúdo' %>
-      <%= option.text_field :content %>
+          <%= option.check_box :answer %>
+          <%= option.label :answer, 'Resposta?' %>
 
-      <%= option.check_box :answer %>
-      <%= option.label :answer, 'Resposta?' %>
-
-
-      <% if option.object.persisted? %>
-        <%= option.check_box :_destroy %>
-        <%= option.label :_destroy, "Destroy" %>
+        </div>
       <% end %>
+      <div class="actions">
+        <%= form.submit 'Criar Questão', class: 'btn btn-primary' %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit 'Criar Questão' %>
   </div>
+
 <% end %>
+
+
 
 <script>
   $(document).ready(function() {
