@@ -15,9 +15,7 @@
       <td><%= question.source %></td>
       <td><%= question.year %></td>
       <td><%= question.user.email %></td>
-      <td><%= link_to 'Show', question, class: 'btn btn-primary' %></td>
-      <td><%= link_to 'Edit', edit_admin_question_path(question), class: 'btn btn-primary' %></td>
-      <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
+      <td><%= link_to 'Revisar', edit_admin_question_path(question), class: 'btn btn-primary' %></td>
     </tr>
   <% end %>
   </tbody>

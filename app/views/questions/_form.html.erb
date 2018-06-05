@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :content, 'Conteúdo' %>
     <%= form.text_field :content, id: :question_content %>
   </div>
 
   <div class="field">
-    <%= form.label :source %>
+    <%= form.label :source, 'Fonte' %>
     <%= form.text_field :source, id: :question_source %>
   </div>
 
   <div class="field">
-    <%= form.label :year %>
+    <%= form.label :year, 'Ano' %>
     <%= form.select :year, (Time.zone.now.year - 100)..(Time.zone.now.year + 1), selected: 2018, id: :question_year %>
   </div>
 
@@ -30,11 +30,11 @@
   <%= form.fields_for :options do |option| %>
     <div>
 
-      <%= option.label :content %>
+      <%= option.label :content, 'Conteúdo' %>
       <%= option.text_field :content %>
 
       <%= option.check_box :answer %>
-      <%= option.label :answer %>
+      <%= option.label :answer, 'Resposta?' %>
 
 
       <% if option.object.persisted? %>
@@ -45,6 +45,12 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Criar Questão' %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+      forceOneCheckBox();
+  });
+</script>
