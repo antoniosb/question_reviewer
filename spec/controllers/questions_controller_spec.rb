@@ -33,7 +33,8 @@ RSpec.describe QuestionsController, type: :controller do
   before { sign_in user }
 
   let(:valid_attributes) {
-    attributes_for(:question).merge(user: user)
+    attributes_for(:question,
+                   options_attributes: { 0 => attributes_for(:option) }).merge(user: user)
   }
 
   let(:invalid_attributes) {
