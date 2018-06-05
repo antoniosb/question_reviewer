@@ -55,3 +55,9 @@ rails c
 ```console
 User.find('newuser@email.com').admin! 
 ```
+
+-----
+
+### Rails ERD representation:
+
+![erd.pdf](https://github.com/antoniosb/question_reviewer/edit/master/erd.pdf)
