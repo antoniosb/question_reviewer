@@ -28,12 +28,16 @@ RSpec.describe QuestionsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # adjust the attributes here as well.
+
+  let(:user) { FactoryBot.create(:user) }
+  before { sign_in user }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:question).merge(user: user)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { content: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -97,14 +101,13 @@ RSpec.describe QuestionsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        attributes_for(:question)
       }
 
       it "updates the requested question" do
         question = Question.create! valid_attributes
         put :update, params: {id: question.to_param, question: new_attributes}, session: valid_session
         question.reload
-        skip("Add assertions for updated state")
       end
 
       it "redirects to the question" do
@@ -138,4 +141,11 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "Try to access without :user role" do
+    it 'does not authorize user with other role' do
+      user.admin!
+      get :index
+      expect(response).to redirect_to(root_path)
+    end
+  end
 end
