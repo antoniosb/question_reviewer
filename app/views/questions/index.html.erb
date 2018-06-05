@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Questions</h1>
+<h1>Questões</h1>
 
 <table class="table">
   <thead>
@@ -20,9 +20,9 @@
         <td><%= question.source %></td>
         <td><%= question.year %></td>
         <td><%= question.status %></td>
-        <td><%= link_to 'Show', question, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Visualizar', question, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Editar', edit_question_path(question), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Apagar', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'Adicionar Questão', new_question_path, class: 'btn btn-primary' %>
